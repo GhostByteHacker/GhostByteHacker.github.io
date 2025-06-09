@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Term1nal-Kill • Cyber Lair</title>
 
-  <!-- styles & fonts -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- libraries -->
+  <!-- Three.js Starfield -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <script src="https://unpkg.com/scrollreveal"></script>
+  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-
-  <!-- your JS -->
+  <!-- Main JS -->
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
-  <!-- dynamic background -->
+
+  <!-- STARFIELD BACKGROUND -->
   <div id="starfield"></div>
 
-  <!-- terminal intro -->
+  <!-- TERMINAL INTRO -->
   <div id="intro">
     <div id="terminal">
       <pre id="terminal-text"></pre>
@@ -29,98 +30,95 @@
     </div>
   </div>
 
-  <!-- navigation -->
-  <nav class="hidden">
-    <a href="#home">Home</a>
-    <a href="#about">About Me</a>
-    <a href="#projects">Projects</a>
-    <a href="#music">Music</a>
-    <a href="#donate">Donate</a>
-  </nav>
+  <!-- NAVIGATION -->
+  <header id="nav" class="hidden">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About Me</a>
+      <a href="#projects">Projects</a>
+      <a href="#music">Music</a>
+      <a href="#donate">Donate</a>
+    </nav>
+  </header>
 
-  <!-- all content hidden until terminal finishes -->
-  <div id="content" class="hidden">
+  <!-- MAIN CONTENT (hidden until intro ends) -->
+  <main id="content" class="hidden">
 
-    <!-- HOME -->
-    <section id="home" class="reveal">
-      <h1>Welcome to my cyber-lair</h1>
-      <p>where hacking meets beats. Find Easter-eggs, explore projects, and drop some crypto if you’re feeling generous.</p>
+    <!-- HOME SECTION -->
+    <section id="home" class="panel reveal">
+      <h1 class="glitch" data-text="Cyber-Lair">Cyber-Lair</h1>
+      <p>Welcome to the neon underworld, where hacking meets beats. Explore the depths, uncover secrets, and fuel the fire with crypto support.</p>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="reveal">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="panel reveal">
       <h2>About Me</h2>
       <div class="timeline">
         <div class="event">
-          <h3>hehe!</h3>
-          <p>mwhahaha</p>
+          <h3>HEEHEE</h3>
+          <p>Tnerdy nerd</p>
         </div>
         <div class="event">
-          <h3>hehe</h3>
-          <p>hello</p>
+          <h3>HAAHAA</h3>
+          <p>:3</p>
         </div>
-        <!-- add more events here if desired -->
+        <!-- Add more events: copy .event blocks -->
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="reveal">
-      <h2>My Hacking Portfolio</h2>
-      <div>
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="panel reveal">
+      <h2>My Hacks & Tools</h2>
+      <div class="filters">
         <button data-filter="all">All</button>
         <button data-filter="hacking">Hacking</button>
         <button data-filter="tools">Tools</button>
       </div>
-      <div class="project-grid">
-        <!-- Project card example -->
-        <div class="project-card" data-cat="hacking">
-          <div class="project-card-inner">
-            <div class="project-front">
+      <div class="grid">
+        <!-- Example Card -->
+        <div class="card" data-cat="hacking">
+          <div class="inner">
+            <div class="front">
               <h3>Root-buster</h3>
-              <p>SSH brute-force tool</p>
+              <p>SSH brute-force toolkit</p>
             </div>
-            <div class="project-back">
-              <p>Node.js tool for smart SSH wordlist attacks.</p>
-              <a href="https://github.com/GhostByteHacker/Worm" target="_blank">View on GitHub</a>
+            <div class="back">
+              <p>Node.js-powered wordlist manager & smart attack flows.</p>
+              <a href="https://github.com/GhostByteHacker/Worm" target="_blank">View Repo</a>
             </div>
           </div>
         </div>
-        <!-- copy & paste the above block for each project -->
+        <!-- Copy & paste .card for each project, update data-cat, titles, links -->
       </div>
     </section>
 
-    <!-- MUSIC -->
-    <section id="music" class="reveal">
+    <!-- MUSIC SECTION -->
+    <section id="music" class="panel reveal">
       <h2>Latest Track</h2>
-      <!-- SoundCloud player -->
+      <!-- SoundCloud embed (visual=true for waveform) -->
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1976099259&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/cyber_shadow" title="Cyb3rSh1ft" target="_blank" style="color: #cccccc; text-decoration: none;">Cyb3rSh1ft</a> · <a href="https://soundcloud.com/cyber_shadow/project-3" title="Project 3" target="_blank" style="color: #cccccc; text-decoration: none;">Project 3</a></div>
 
-      <!-- local audio + visualizer -->
+      <!-- Optional local player + visualizer -->
       <audio id="audio" controls src="assets/audio/mello.mp3"></audio>
       <canvas id="visualizer"></canvas>
     </section>
 
-    <!-- DONATE -->
-    <section id="donate" class="reveal">
-      <h2>Support via Crypto</h2>
-
-      <!-- Monero -->
+    <!-- DONATE SECTION -->
+    <section id="donate" class="panel reveal">
+      <h2>Fuel the Fire</h2>
       <div class="wallet">
         <h3>Monero (XMR)</h3>
         <button onclick="copyAddress('4AjKsKkrQko88WSuR1tMrMGzxRAYYfP9ya6Ln58zWGXNKEs4sk3WQXAfNcAY7WeDtshe1wENma4eEZ1a81WqYRfwDG8YkKY')">Copy Address</button>
         <img src="assets/images/XMR.png" alt="XMR QR">
       </div>
-
-      <!-- Ethereum -->
       <div class="wallet">
         <h3>Ethereum (ETH)</h3>
         <button onclick="copyAddress('0xEF48499c5E25aBa07Bda06Ecf87632E2C1C3c932')">Copy Address</button>
         <img src="assets/images/ETH.png" alt="ETH QR">
       </div>
-
-      <!-- add more wallets as needed -->
+      <!-- Add more wallets as needed -->
     </section>
 
-  </div>
+  </main>
 </body>
 </html>
