@@ -139,22 +139,17 @@ h1, h2 {
   background: var(--accent1);
   color: #000;
 }
-
-/* ↓↓↓ Modified grid & card sizing ↓↓↓ */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;
 }
 .card {
   perspective: 1000px;
-  max-width: 260px;    /* cap width */
-  margin: 0 auto;      /* center in cell */
 }
 .inner {
   position:relative;
-  width:100%;
-  padding-top:60%;     /* squatter aspect ratio */
+  width:100%; padding-top:75%;
   transform-style: preserve-3d;
   transition: transform .8s ease;
 }
@@ -167,8 +162,7 @@ h1, h2 {
   background: rgba(0,0,0,0.6);
   border:1px solid var(--accent1);
   border-radius:4px;
-  padding: .75rem;     /* tighter padding */
-  overflow:hidden;
+  padding:1rem; overflow:hidden;
 }
 .back {
   transform:rotateY(180deg);
