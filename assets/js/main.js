@@ -38,7 +38,7 @@ function initStarfield() {
 function startTerminal() {
   const txtElem = document.getElementById('terminal-text');
   const cont    = document.getElementById('continue-text');
-  const message = '>> booting Cyber-Lair v2.0...\n>> loading beats and scripts...\n>> Welcome, Term1nal-Kill\n>> echo "Let\'s rock the net and drop beats!"\n';
+  const message = '>> booting Cyber-Lair v2.0...\n>> loading beats and scripts...\n>> Welcome, User\n>> echo "The end is never the end."\n';
   let i = 0;
   (function typer(){
     if (i < message.length) {
