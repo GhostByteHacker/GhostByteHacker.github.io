@@ -1,32 +1,30 @@
-// ——— Starfield Background (Three.js) ———
+// STARFIELD (Three.js)
 function initStarfield() {
   const container = document.getElementById('starfield');
   const scene     = new THREE.Scene();
   const camera    = new THREE.PerspectiveCamera(75, container.clientWidth/container.clientHeight, 1, 1000);
-  const renderer  = new THREE.WebGLRenderer({ alpha:true });
   camera.position.z = 400;
+  const renderer  = new THREE.WebGLRenderer({ alpha:true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
 
-  // generate points
-  const pts = 8000;
-  const pos = new Float32Array(pts * 3);
-  for (let i = 0; i < pts; i++) {
+  const count = 8000;
+  const pos   = new Float32Array(count*3);
+  for (let i=0; i<count; i++) {
     pos[i*3]   = (Math.random()-0.5)*2000;
     pos[i*3+1] = (Math.random()-0.5)*2000;
     pos[i*3+2] = (Math.random()-0.5)*2000;
   }
   const geom = new THREE.BufferGeometry();
   geom.setAttribute('position', new THREE.BufferAttribute(pos,3));
-  const mat = new THREE.PointsMaterial({ color:0xffffff, size:1 });
-  const stars = new THREE.Points(geom, mat);
+  const mat  = new THREE.PointsMaterial({ color:0xffffff, size:1 });
+  const stars= new THREE.Points(geom, mat);
   scene.add(stars);
 
-  // animate
-  (function anim(){
-    stars.rotation.y += 0.0008;
+  (function animate(){
+    stars.rotation.y += 0.0006;
     renderer.render(scene, camera);
-    requestAnimationFrame(anim);
+    requestAnimationFrame(animate);
   })();
 
   window.addEventListener('resize', () => {
@@ -36,29 +34,32 @@ function initStarfield() {
   });
 }
 
-// ——— Fancy Terminal Intro ———
+// TERMINAL TYPING INTRO
 function startTerminal() {
-  const txt = document.getElementById('terminal-text');
-  const cue = document.getElementById('continue-text');
-  const msg = '>> Welcome, Term1nal-Kill\n>> echo "Let\'s rock the net and drop beats!"\n';
+  const txtElem = document.getElementById('terminal-text');
+  const cont    = document.getElementById('continue-text');
+  const message = '>> Welcome, Term1nal-Kill\n>> echo "Let\'s rock the net and drop beats!"\n';
   let i = 0;
-  (function type(){
-    if (i < msg.length) {
-      txt.innerText += msg[i++];
-      setTimeout(type, 40 + Math.random()*20);
+  (function typer(){
+    if (i < message.length) {
+      txtElem.innerText += message[i++];
+      setTimeout(typer, 30 + Math.random()*30);
     } else {
-      setTimeout(() => { cue.style.opacity = 1; document.addEventListener('keydown', openSite); }, 400);
+      setTimeout(() => {
+        cont.style.opacity = 1;
+        document.addEventListener('keydown', openLair);
+      }, 500);
     }
   })();
 }
-function openSite() {
+function openLair() {
   document.getElementById('intro').classList.add('hidden');
   document.getElementById('content').classList.remove('hidden');
-  document.querySelector('nav').classList.remove('hidden');
-  document.removeEventListener('keydown', openSite);
+  document.getElementById('nav').classList.remove('hidden');
+  document.removeEventListener('keydown', openLair);
 }
 
-// ——— IntersectionObserver Reveal ———
+// REVEAL ON SCROLL
 function initReveal() {
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -71,56 +72,57 @@ function initReveal() {
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 }
 
-// ——— Project Filtering ———
+// PROJECT FILTER
 function initFilter() {
   document.querySelectorAll('[data-filter]').forEach(btn => {
     btn.onclick = () => {
       const cat = btn.dataset.filter;
-      document.querySelectorAll('.project-card').forEach(c => {
-        c.style.display = (cat==='all' || c.dataset.cat===cat) ? '' : 'none';
+      document.querySelectorAll('.card').forEach(c => {
+        c.style.display = (cat==='all'||c.dataset.cat===cat) ? '' : 'none';
       });
     };
   });
 }
 
-// ——— Copy Address + Confetti ———
+// COPY + CONFETTI
 function copyAddress(addr) {
   navigator.clipboard.writeText(addr).then(() => {
-    confetti({ particleCount: 120, spread: 80, origin:{ y:0.6 } });
+    confetti({ particleCount:120, spread:70, origin:{ y:0.6 } });
   });
 }
 
-// ——— Audio Visualizer ———
-function initAudioVis() {
+// AUDIO VISUALIZER
+function initVisualizer() {
   const audio = document.getElementById('audio');
-  const canvas = document.getElementById('visualizer');
+  const canvas= document.getElementById('visualizer');
   if (!audio||!canvas) return;
   const ctx = canvas.getContext('2d');
-  const actx = new (window.AudioContext||window.webkitAudioContext)();
-  const src  = actx.createMediaElementSource(audio);
+  const actx= new (window.AudioContext||window.webkitAudioContext)();
+  const src = actx.createMediaElementSource(audio);
   const analyser = actx.createAnalyser();
   src.connect(analyser); analyser.connect(actx.destination);
   analyser.fftSize = 256;
   const data = new Uint8Array(analyser.frequencyBinCount);
 
-  (function draw(){
+  (function draw() {
     requestAnimationFrame(draw);
     analyser.getByteFrequencyData(data);
     ctx.clearRect(0,0,canvas.width,canvas.height);
     let x=0, w=(canvas.width/data.length)*2.5;
     data.forEach(v => {
       const h = v/2;
-      ctx.fillRect(x, canvas.height-h, w, h);
+      ctx.fillStyle = '#00ffe7';
+      ctx.fillRect(x, canvas.height - h, w, h);
       x += w+1;
     });
   })();
 }
 
-// ——— Boot Everything ———
+// INITIALIZE ALL
 window.addEventListener('load', () => {
   initStarfield();
   startTerminal();
   initReveal();
   initFilter();
-  initAudioVis();
+  initVisualizer();
 });
