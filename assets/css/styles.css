@@ -1,28 +1,28 @@
-/*————————————————— Variables & Reset —————————————————*/
+/*————————————— VARIABLES & RESET —————————————*/
 :root {
-  --bg1: #0a0a0a;
-  --bg2: #050505;
-  --accent: #00ffe7;
+  --bg-dark: #0a0a0a;
+  --bg-darker: #050505;
+  --accent1: #00ffe7;
   --accent2: #ff00c8;
-  --text: #e0e0e0;
-  --glow: rgba(0, 255, 231, 0.6);
+  --text-light: #e0e0e0;
+  --glow: rgba(0,255,231,0.6);
+  --font: 'Share Tech Mono', monospace;
   --transition: 0.6s ease-out;
-  --font-mono: 'Share Tech Mono', monospace;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));
-  color: var(--text);
-  font-family: var(--font-mono);
-  overflow-x:hidden;
+  background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+  color: var(--text-light);
+  font-family: var(--font);
+  overflow-x: hidden;
 }
 
-/*————————————————— Utilities —————————————————*/
+/*————————————— HIDDEN/REVEAL —————————————*/
 .hidden { display:none!important; }
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
   transition: opacity var(--transition), transform var(--transition);
 }
 .reveal.active {
@@ -30,150 +30,175 @@ body {
   transform: translateY(0);
 }
 
-/*————————————————— Navigation —————————————————*/
-nav {
-  position: sticky; top:0;
-  display:flex; gap:1rem;
-  padding:1rem 2rem;
-  background:rgba(5,5,5,0.9);
-  z-index:200;
+/*————————————— STARFIELD —————————————*/
+#starfield {
+  position: fixed; inset: 0;
+  z-index: -1;
 }
-nav a {
-  color: var(--accent);
-  padding:.5rem 1rem;
-  border:1px solid var(--accent);
-  border-radius:4px;
-  position: relative;
-  transition: background var(--transition), color var(--transition);
-}
-nav a::before {
-  content:''; position:absolute; inset:0;
-  background: var(--accent2);
-  mix-blend-mode:screen;
-  opacity:0; transition:opacity 0.3s;
-}
-nav a:hover {
-  background: var(--accent);
-  color: #000;
-}
-nav a:hover::before { opacity:0.2; }
 
-/*————————————————— Intro Terminal —————————————————*/
+/*————————————— TERMINAL INTRO —————————————*/
 #intro {
-  position:fixed; inset:0;
+  position: fixed; inset:0;
   background:#000; display:flex;
   align-items:center; justify-content:center;
   z-index:300;
 }
 #terminal {
-  border:2px solid var(--glow);
-  padding:1.5rem; width:80vw; max-width:600px;
-  background:rgba(0,0,0,0.8); box-shadow:0 0 20px var(--glow);
+  background: rgba(0,0,0,0.85);
+  border: 2px solid var(--glow);
+  box-shadow: 0 0 20px var(--glow);
+  padding: 1.5rem;
+  width: 80vw; max-width: 600px;
 }
 #terminal-text {
-  color: var(--accent);
-  font-size:1rem; line-height:1.4;
-  min-height:4rem; white-space:pre-wrap;
+  color: var(--accent1);
+  font-size: 1rem; line-height:1.4;
+  min-height: 4rem; white-space: pre-wrap;
 }
 #continue-text {
-  color: var(--text);
-  font-size:.8rem; opacity:0;
-  transition:opacity .4s ease-in;
+  color: var(--text-light);
+  font-size: .8rem;
+  opacity: 0; transition: opacity .4s ease-in;
+  text-align: right;
 }
 
-/*————————————————— Starfield —————————————————*/
-#starfield { position:fixed; inset:0; z-index:-1; }
-
-/*————————————————— Sections —————————————————*/
-section {
-  padding:4rem 2rem; min-height:80vh;
-  border-bottom:1px solid rgba(255,255,255,0.05);
+/*————————————— NAVIGATION —————————————*/
+header {
+  position: sticky; top:0;
+  z-index:200;
 }
-section h1, section h2 {
-  font-size:2.5rem; margin-bottom:1rem;
-  color:var(--accent);
-  position:relative; display:inline-block;
-  text-shadow:
-    0 0 8px var(--glow),
-    0 0 16px var(--glow);
+nav {
+  display:flex; gap:1rem;
+  padding:1rem 2rem;
+  background: rgba(5,5,5,0.9);
+}
+nav a {
+  color: var(--accent1);
+  padding:.5rem 1rem;
+  border:1px solid var(--accent1);
+  border-radius:4px;
+  position:relative;
+  transition: background .3s, color .3s;
+}
+nav a:hover {
+  background: var(--accent1);
+  color: #000;
+}
+
+/*————————————— PANELS & HEADINGS —————————————*/
+.panel {
+  padding: 4rem 2rem;
+  min-height: 80vh;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+h1, h2 {
+  font-size: 2.5rem;
+  color: var(--accent1);
+  text-shadow: 0 0 8px var(--glow), 0 0 16px var(--glow);
+  position: relative;
+  margin-bottom: 1rem;
+}
+.glitch {
   animation: neon-flicker 3s infinite alternate ease-in-out;
 }
 @keyframes neon-flicker {
-  0%,100% { text-shadow:0 0 8px var(--glow), 0 0 16px var(--glow); }
-  50%     { text-shadow:0 0 4px var(--glow), 0 0 8px var(--glow); }
+  0%,100% { text-shadow: 0 0 4px var(--glow), 0 0 8px var(--glow); }
+  50%    { text-shadow: 0 0 2px var(--glow), 0 0 4px var(--glow); }
 }
 
-/*————————————————— About / Timeline —————————————————*/
+/*————————————— ABOUT / TIMELINE —————————————*/
 .timeline {
-  display:flex; gap:2rem; overflow-x:auto;
-  padding-bottom:1rem;
+  display: flex; gap:2rem; overflow-x:auto;
 }
-.timeline .event {
-  flex:0 0 260px; background:rgba(0,0,0,0.6);
-  border:1px solid var(--accent); border-radius:4px;
-  padding:1rem; box-shadow:0 0 10px rgba(0,0,0,0.5);
+.event {
+  background: rgba(0,0,0,0.6);
+  border:1px solid var(--accent1);
+  border-radius:4px;
+  padding:1rem;
+  min-width: 240px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
-.timeline .event h3 {
-  margin-bottom:.5rem; color:var(--accent2);
-}
+.event h3 { color: var(--accent2); margin-bottom:.5rem; }
 
-/*————————————————— Projects —————————————————*/
-.project-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:1.5rem; margin-top:1rem;
+/*————————————— PROJECTS GRID —————————————*/
+.filters {
+  margin-bottom:1rem;
 }
-.project-card {
-  perspective:1000px;
+.filters button {
+  font-family: var(--font);
+  background: none;
+  border:1px solid var(--accent1);
+  color: var(--accent1);
+  padding:.4rem .8rem;
+  margin-right:.5rem;
+  border-radius:4px;
+  cursor:pointer;
+  transition: background .3s, color .3s;
 }
-.project-card-inner {
-  position:relative; width:100%; padding-top:75%;
-  transform-style:preserve-3d;
-  transition:transform .8s ease;
+.filters button:hover {
+  background: var(--accent1);
+  color: #000;
 }
-.project-card:hover .project-card-inner {
-  transform:rotateY(180deg);
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;
 }
-.project-front, .project-back {
+.card {
+  perspective: 1000px;
+}
+.inner {
+  position:relative;
+  width:100%; padding-top:75%;
+  transform-style: preserve-3d;
+  transition: transform .8s ease;
+}
+.card:hover .inner {
+  transform: rotateY(180deg);
+}
+.front, .back {
   position:absolute; inset:0;
   backface-visibility:hidden;
-  background:rgba(0,0,0,0.6);
-  border:1px solid var(--accent);
+  background: rgba(0,0,0,0.6);
+  border:1px solid var(--accent1);
   border-radius:4px;
   padding:1rem; overflow:hidden;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
-.project-back {
+.back {
   transform:rotateY(180deg);
 }
-.project-front h3, .project-back h3 {
-  color:var(--accent2); margin-bottom:.5rem;
+.front h3, .back h3 {
+  color: var(--accent2);
+  margin-bottom:.5rem;
 }
 
-/*————————————————— Music & Visualizer —————————————————*/
+/*————————————— MUSIC & VISUALIZER —————————————*/
 #audio { margin-top:1rem; width:100%; }
 #visualizer {
-  display:block; width:100%; height:150px;
-  margin-top:1rem; background:#111;
-  border:1px solid var(--accent);
-  box-shadow:0 0 8px var(--glow);
+  margin-top:1rem;
+  width:100%; height:150px;
+  background:#111;
+  border:1px solid var(--accent1);
+  box-shadow: 0 0 8px var(--glow);
 }
 
-/*————————————————— Donate —————————————————*/
+/*————————————— DONATE —————————————*/
 .wallet {
-  background:rgba(0,0,0,0.6);
-  border:1px solid var(--accent);
+  background: rgba(0,0,0,0.6);
+  border:1px solid var(--accent1);
   border-radius:4px;
   padding:1rem; margin-bottom:1.5rem;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
-.wallet h3 { margin-bottom:.5rem; color:var(--accent2); }
+.wallet h3 { color: var(--accent2); margin-bottom:.5rem; }
 .wallet button {
-  font-family:var(--font-mono);
-  background:var(--accent);
-  border:none; padding:.5rem 1rem;
-  border-radius:4px; cursor:pointer;
-  transition:transform .2s;
+  font-family: var(--font);
+  background: var(--accent1);
+  border: none;
+  padding:.5rem 1rem;
+  border-radius:4px;
+  cursor:pointer;
+  transition: transform .2s;
 }
-.wallet button:hover { transform:scale(1.05); }
-.wallet img { display:block; margin-top:.5rem; width:150px; }
+.wallet button:hover { transform: scale(1.05); }
+.wallet img { margin-top:.5rem; width:150px; display:block; }
